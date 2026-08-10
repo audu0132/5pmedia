@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5P Media | Full-Service Media, Web & Digital Marketing Agency</title>
+    <meta name="description" content="5P Media — Premium creative digital agency specializing in web development, SEO, digital marketing, branding, and e-commerce solutions.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 (layout grid) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind compiled -->
+    <link rel="stylesheet" href="output.css">
+
+    <style>
+    /* Hide native scrollbar */
+    ::-webkit-scrollbar { display: none; }
+    html {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    /* =============================================
+       DESIGN TOKENS — PREMIUM WARM CREAM
+    ============================================= */
+    :root {
+        --bg:       #faf7f2;
+        --surface:  #f3efe6;
+        --surface2: #eae3d5;
+        --card:     #fdfbf7;
+        --accent:   #e65100;
+        --emerald:  #d84315;
+        --deep:     #b71c1c;
+        --text:     #1c1917;
+        --text2:    rgba(28,25,23,0.72);
+        --text3:    rgba(28,25,23,0.45);
+        --border:   rgba(28,25,23,0.09);
+        --glow:     rgba(230,81,0,0.12);
+        --glow2:    rgba(230,81,0,0.06);
+    }
+
+    /* =============================================
+       BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body {
+        background: var(--bg) !important;
+        color: var(--text) !important;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        cursor: none !important;
+    }
+    ::selection { background: var(--accent); color: #ffffff; }
+    a { text-decoration: none; }
+    .font-display { font-family: 'Manrope', sans-serif; }
+
+    /* Lenis */
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* Bootstrap override */
+    .container-fluid, .container { max-width: 1320px; }
+
+    /* =============================================
+       AURORA BACKGROUND
+    ============================================= */
+    .aurora-wrap {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(110px);
+        will-change: transform;
+    }
+    .blob-1 {
+        width: 700px; height: 700px;
+        background: radial-gradient(circle, rgba(230,81,0,0.1) 0%, rgba(243,239,230,0.4) 40%, transparent 70%);
+        top: -15%; left: -12%;
+        opacity: 0.85;
+        animation: blobDrift1 20s ease-in-out infinite;
+    }
+    .blob-2 {
+        width: 550px; height: 550px;
+        background: radial-gradient(circle, rgba(216,67,21,0.08) 0%, rgba(243,239,230,0.3) 40%, transparent 70%);
+        top: 35%; right: -10%;
+        opacity: 0.8;
+        animation: blobDrift2 25s ease-in-out infinite;
+    }
+    .blob-3 {
+        width: 380px; height: 380px;
+        background: radial-gradient(circle, rgba(230,81,0,0.06) 0%, transparent 70%);
+        bottom: 5%; left: 28%;
+        opacity: 0.75;
+        animation: blobDrift3 30s ease-in-out infinite;
+    }
+    @keyframes blobDrift1 {
+        0%,100% { transform:translate(0,0) scale(1); }
+        33%      { transform:translate(65px,45px) scale(1.08); }
+        66%      { transform:translate(-35px,80px) scale(0.94); }
+    }
+    @keyframes blobDrift2 {
+        0%,100% { transform:translate(0,0) scale(1); }
+        33%      { transform:translate(-85px,-55px) scale(1.1); }
+        66%      { transform:translate(45px,60px) scale(0.92); }
+    }
+    @keyframes blobDrift3 {
+        0%,100% { transform:translate(0,0) scale(1); }
+        50%      { transform:translate(-55px,-40px) scale(1.14); }
+    }
+
+    /* Mouse-tracking radial glow */
+    .mouse-glow {
+        position: fixed;
+        width: 700px; height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(230,81,0,0.045) 0%, transparent 65%);
+        transform: translate(-50%,-50%);
+        pointer-events: none;
+        z-index: 1;
+        will-change: left, top;
+        transition: left 0.08s linear, top 0.08s linear;
+    }
+
+    /* Noise grain */
+    .noise-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* =============================================
+       CURSOR
+    ============================================= */
+    .cursor-dot {
+        width: 8px; height: 8px;
+        background: var(--text);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%,-50%);
+        box-shadow: 0 0 12px rgba(28,25,23,0.3);
+        transition: width 0.2s, height 0.2s, opacity 0.2s;
+    }
+    .cursor-ring {
+        width: 38px; height: 38px;
+        border: 1.5px solid rgba(28,25,23,0.25);
+        border-radius: 50%;
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%,-50%);
+        transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+    }
+    body.hovering .cursor-dot  { width: 5px; height: 5px; opacity: 0.5; }
+    body.hovering .cursor-ring { width: 68px; height: 68px; border-color: var(--accent); background: rgba(230,81,0,0.04); }
+
+    /* =============================================
+       PRELOADER
+    ============================================= */
+    #preloader {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+    }
+    .pre-logo {
+        display: flex;
+        align-items: center;
+    }
+    .pre-logo img { width: clamp(150px, 22vw, 220px); height: auto; display: block; }
+    .pre-bar-wrap {
+        width: clamp(160px, 25vw, 240px);
+        height: 2px;
+        background: rgba(28,25,23,0.12);
+        position: relative;
+        overflow: hidden;
+    }
+    .pre-bar {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        box-shadow: 0 0 12px var(--accent);
+        transition: width 0.08s linear;
+    }
+    .pre-num {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.68rem;
+        letter-spacing: 0.35em;
+        color: var(--text3);
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    #main-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 500;
+        padding: 1.6rem 4vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.5s cubic-bezier(0.4,0,0.2,1),
+                    background 0.4s ease,
+                    border-color 0.4s ease;
+    }
+    #main-nav.scrolled {
+        background: rgba(250,247,242,0.92);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        line-height: 0;
+    }
+    .nav-logo img {
+        width: 160px;
+        height: auto;
+        display: block;
+        max-width: 100%;
+    }
+    @media (max-width: 640px) {
+        .nav-logo img { width: 135px; }
+    }
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .nav-links a {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text2);
+        position: relative;
+        transition: color 0.3s;
+    }
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; left: 0;
+        width: 0; height: 1.5px;
+        background: var(--accent);
+        transition: width 0.35s cubic-bezier(0.19,1,0.22,1);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .btn-nav {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #ffffff;
+        background: var(--text);
+        padding: 0.65rem 1.75rem;
+        border-radius: 100px;
+        box-shadow: 0 4px 18px rgba(28,25,23,0.12);
+        transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+        display: inline-block;
+    }
+    .btn-nav:hover {
+        background: var(--accent);
+        color: #ffffff;
+        box-shadow: 0 6px 24px rgba(230,81,0,0.25);
+        transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: none;
+        padding: 4px;
+    }
+    .ham-bar {
+        display: block;
+        width: 22px; height: 1.5px;
+        background: var(--text);
+        transition: transform 0.4s cubic-bezier(0.19,1,0.22,1), opacity 0.3s;
+        transform-origin: center;
+    }
+    .hamburger.open .ham-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open .ham-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open .ham-bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile nav overlay */
+    #mob-nav {
+        position: fixed;
+        inset: 0;
+        background: rgba(250,247,242,0.97);
+        backdrop-filter: blur(20px);
+        z-index: 490;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+    }
+    #mob-nav.open { opacity: 1; pointer-events: all; }
+    #mob-nav a {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.2rem, 8vw, 4.5rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text);
+        transition: color 0.3s;
+        letter-spacing: -0.02em;
+    }
+    #mob-nav a:hover { color: var(--accent); }
+
+    /* =============================================
+       SECTION EYEBROW UTILITY
+    ============================================= */
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+    }
+    .eyebrow::before {
+        content: '';
+        display: block;
+        width: 28px; height: 1.5px;
+        background: var(--accent);
+        flex-shrink: 0;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+        position: relative;
+        min-height: 100svh;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        padding: 10rem 4vw 6rem;
+        z-index: 5;
+        overflow: hidden;
+        gap: 2rem;
+    }
+
+    .hero-left { max-width: 1050px; width: 100%; }
+
+    .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    .hero-tag::before {
+        content: '';
+        display: block;
+        width: 32px; height: 1.5px;
+        background: var(--accent);
+    }
+
+    .hero-h1 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(3.8rem, 9.5vw, 10.5rem);
+        font-weight: 800;
+        line-height: 0.87;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+        color: var(--text);
+    }
+
+    .h-line {
+        display: block;
+        overflow: hidden;
+    }
+    .h-word {
+        display: inline-block;
+        transform: translateY(110%);
+        filter: blur(6px);
+        will-change: transform, filter;
+        padding-right: 0.05em;
+    }
+    /* Brand gradient line */
+    .h-line--green .h-word {
+        background: linear-gradient(120deg, #e65100 0%, #d84315 55%, #1c1917 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: blur(6px);
+    }
+    /* Outline/stroke line */
+    .h-line--stroke .h-word {
+        -webkit-text-stroke: 1.5px rgba(28,25,23,0.35);
+        color: transparent;
+        filter: blur(6px);
+    }
+
+    .hero-sub {
+        font-size: clamp(1rem, 1.9vw, 1.25rem);
+        color: var(--text2);
+        line-height: 1.8;
+        max-width: 50ch;
+        margin-bottom: 2.8rem;
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    .hero-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    .btn-g-fill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #ffffff;
+        background: var(--text);
+        padding: 1rem 2.4rem;
+        border-radius: 100px;
+        box-shadow: 0 6px 24px rgba(28,25,23,0.15);
+        transition: background 0.35s, box-shadow 0.35s, transform 0.12s;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-g-fill::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 55%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .btn-g-fill:hover {
+        background: var(--accent);
+        box-shadow: 0 8px 30px rgba(230,81,0,0.3);
+        color: #ffffff;
+    }
+    .btn-g-fill:hover::before { opacity: 1; }
+
+    .btn-g-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text);
+        background: transparent;
+        padding: 1rem 2.4rem;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        transition: border-color 0.35s, background 0.35s, color 0.35s;
+    }
+    .btn-g-ghost:hover {
+        border-color: rgba(230,81,0,0.4);
+        background: rgba(230,81,0,0.05);
+        color: var(--accent);
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+        position: absolute;
+        bottom: 3rem;
+        left: 4vw;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        opacity: 0;
+    }
+    .hero-scroll span {
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text3);
+        font-family: 'Manrope', sans-serif;
+    }
+    .scrl-line {
+        width: 56px; height: 1.5px;
+        background: rgba(28,25,23,0.12);
+        position: relative;
+        overflow: hidden;
+    }
+    .scrl-line::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: var(--accent);
+        animation: scrollLinePulse 2s ease-in-out infinite;
+    }
+
+    /* Hero abstract ring ornament */
+    .hero-orb {
+        position: relative;
+        width: clamp(260px, 30vw, 500px);
+        aspect-ratio: 1;
+        flex-shrink: 0;
+        align-self: center;
+        opacity: 0;
+    }
+    .orb-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 1px solid rgba(28,25,23,0.1);
+        animation: orbitSpin 22s linear infinite;
+    }
+    .orb-ring:nth-child(2) {
+        inset: 9%;
+        border-color: rgba(230,81,0,0.15);
+        animation-direction: reverse;
+        animation-duration: 30s;
+    }
+    .orb-ring:nth-child(3) {
+        inset: 20%;
+        border-color: rgba(28,25,23,0.06);
+        animation-duration: 40s;
+    }
+    .orb-ring::before {
+        content: '';
+        position: absolute;
+        top: -3px; left: 50%;
+        width: 6px; height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 12px var(--accent);
+        transform: translateX(-50%);
+    }
+    .orb-core {
+        position: absolute;
+        inset: 32%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(230,81,0,0.12) 0%, transparent 70%);
+        animation: glowBeat 4s ease-in-out infinite;
+    }
+
+    /* =============================================
+       ABOUT SECTION
+    ============================================= */
+    #about {
+        padding: clamp(5rem,10vw,10rem) 4vw;
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+    }
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        align-items: center;
+    }
+    @media (min-width: 992px) {
+        .about-grid { grid-template-columns: 1.2fr 0.8fr; gap: 7rem; }
+    }
+    .about-h2 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 4.5rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+        color: var(--text);
+        margin-bottom: 2rem;
+    }
+    .about-h2 .g-word {
+        color: var(--accent);
+    }
+    .about-p {
+        font-size: clamp(1rem,1.7vw,1.15rem);
+        color: var(--text2);
+        line-height: 1.82;
+        max-width: 52ch;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Big stat card */
+    .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1.5rem;
+        padding: clamp(2.5rem,5vw,4rem) clamp(2rem,4vw,3rem);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 15%; right: 15%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .stat-card::after {
+        content: '';
+        position: absolute;
+        bottom: -80px; left: 50%;
+        transform: translateX(-50%);
+        width: 240px; height: 240px;
+        background: radial-gradient(circle, rgba(230,81,0,0.06) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .stat-big {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(5rem, 14vw, 9rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: var(--accent);
+        display: block;
+    }
+    .stat-big-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text3);
+        font-weight: 600;
+        margin-top: 0.75rem;
+        display: block;
+    }
+
+    /* =============================================
+       SERVICES
+    ============================================= */
+    #services {
+        padding: clamp(5rem,10vw,10rem) 4vw;
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+    }
+    .svs-header {
+        display: flex;
+        flex-direction: column;
+        max-width: 1280px;
+        margin: 0 auto clamp(3.5rem,7vw,5rem);
+    }
+    @media (min-width: 768px) {
+        .svs-header {
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+    }
+    .svs-h2 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 0.88;
+        color: var(--text);
+    }
+    .svs-note {
+        font-size: clamp(0.88rem, 1.5vw, 1.05rem);
+        color: var(--text2);
+        max-width: 34ch;
+        line-height: 1.7;
+        margin-top: 1.5rem;
+    }
+    @media (min-width: 768px) {
+        .svs-note { margin-top: 0; }
+    }
+
+    .svs-list { max-width: 1280px; margin: 0 auto; }
+
+    .svs-block {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        padding: 2.8rem 0;
+        border-top: 1px solid rgba(28,25,23,0.08);
+        position: relative;
+        overflow: hidden;
+        transition: padding-left 0.5s cubic-bezier(0.19,1,0.22,1);
+    }
+    .svs-block:last-child { border-bottom: 1px solid rgba(28,25,23,0.08); }
+
+    .svs-block::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0;
+        width: 2px; height: 0;
+        background: var(--accent);
+        transition: height 0.5s cubic-bezier(0.19,1,0.22,1);
+    }
+    .svs-block:hover::before { height: 100%; }
+    .svs-block::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 15% 50%, rgba(230,81,0,0.04) 0%, transparent 65%);
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+    .svs-block:hover::after { opacity: 1; }
+    .svs-block:hover { padding-left: 1.5rem; }
+
+    .svs-num {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.8rem,5vw,5rem);
+        font-weight: 800;
+        color: rgba(28,25,23,0.15);
+        line-height: 1;
+        flex-shrink: 0;
+        width: 4.5rem;
+        transition: color 0.4s;
+        position: relative; z-index: 1;
+    }
+    .svs-block:hover .svs-num { color: var(--accent); }
+
+    .svs-body {
+        flex: 1;
+        padding-top: 0.4rem;
+        transition: transform 0.45s cubic-bezier(0.19,1,0.22,1);
+        position: relative; z-index: 1;
+    }
+    .svs-block:hover .svs-body { transform: translateX(6px); }
+
+    .svs-title {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(1.4rem, 3vw, 2.4rem);
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        margin-bottom: 0.65rem;
+        transition: color 0.35s;
+    }
+    .svs-block:hover .svs-title { color: var(--accent); }
+
+    .svs-desc {
+        font-size: clamp(0.9rem,1.4vw,1.05rem);
+        color: var(--text2);
+        line-height: 1.72;
+        max-width: 60ch;
+    }
+    .svs-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 1.2rem;
+    }
+    .svs-chip {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text3);
+        border: 1px solid rgba(28,25,23,0.12);
+        padding: 0.28rem 0.75rem;
+        border-radius: 100px;
+        transition: border-color 0.35s, color 0.35s;
+    }
+    .svs-block:hover .svs-chip {
+        border-color: rgba(230,81,0,0.3);
+        color: var(--accent);
+    }
+
+    .svs-arrow {
+        flex-shrink: 0;
+        width: 2.8rem; height: 2.8rem;
+        border: 1px solid rgba(28,25,23,0.12);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text3);
+        margin-top: 0.4rem;
+        transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
+        position: relative; z-index: 1;
+    }
+    .svs-block:hover .svs-arrow {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(230,81,0,0.06);
+        transform: rotate(45deg);
+    }
+
+    /* =============================================
+       PORTFOLIO
+    ============================================= */
+    #work {
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+    }
+    .work-head {
+        padding: clamp(4rem,7vw,7rem) 4vw 3rem;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+    .work-h2 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.5rem,5.5vw,5.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 0.88;
+        color: var(--text);
+    }
+
+    .pf-card {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: var(--bg);
+    }
+    .pf-img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7) saturate(0.85);
+        transform: scale(1.04);
+        transition: filter 0.7s, transform 0.7s;
+    }
+    .pf-card:hover .pf-img {
+        filter: brightness(0.45) saturate(0.7);
+        transform: scale(1.06);
+    }
+    .pf-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(28,25,23,0.92) 0%, rgba(28,25,23,0.15) 55%, transparent 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: clamp(2rem,5vw,5rem);
+    }
+    .pf-green-sheen {
+        position: absolute;
+        inset: 0;
+        background: rgba(230,81,0,0.03);
+        opacity: 0;
+        transition: opacity 0.6s;
+    }
+    .pf-card:hover .pf-green-sheen { opacity: 1; }
+    .pf-cat {
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #ff8800;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+    .pf-title {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(3.5rem, 8vw, 8rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #ffffff;
+        line-height: 0.88;
+        letter-spacing: -0.03em;
+    }
+    .pf-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #ff8800;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.4s 0.08s, transform 0.4s 0.08s, color 0.3s;
+    }
+    .pf-card:hover .pf-link { opacity: 1; transform: translateY(0); }
+    .pf-link:hover { color: #ffffff; }
+    .pf-link svg { transition: transform 0.3s; }
+    .pf-link:hover svg { transform: translate(4px,-4px); }
+
+    /* =============================================
+       STATS SECTION
+    ============================================= */
+    #stats {
+        padding: clamp(5rem,10vw,9rem) 4vw;
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+    }
+    .stats-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        overflow: hidden;
+        margin-top: 3.5rem;
+    }
+    @media (min-width: 768px) {
+        .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    .stat-cell {
+        background: var(--card);
+        padding: clamp(2.2rem,5vw,4rem) clamp(1.5rem,3vw,2.5rem);
+        text-align: center;
+        position: relative;
+        min-width: 0;
+        transition: background 0.4s;
+    }
+    .stat-cell:hover { background: var(--surface2); }
+    .stat-cell::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 20%; right: 20%;
+        height: 1.5px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        opacity: 0;
+        transition: opacity 0.6s;
+    }
+    .stat-cell.active::before { opacity: 1; }
+    .stat-val {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.03em;
+        line-height: 1;
+        display: block;
+    }
+    .stat-sfx { color: var(--accent); }
+    .stat-lbl {
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--text3);
+        font-weight: 600;
+        margin-top: 0.75rem;
+        display: block;
+        line-height: 1.5;
+    }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    #testimonials {
+        padding: clamp(5rem,8vw,8rem) 0;
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+        overflow: hidden;
+    }
+    .testi-head {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        padding: 0 4vw;
+    }
+    .marquee-wrap {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+    .marquee-track {
+        display: flex;
+        gap: 1.5rem;
+        width: fit-content;
+    }
+    .t-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: clamp(1.5rem,3vw,2.5rem);
+        width: 380px;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.35s;
+    }
+    .t-card::before {
+        content: '\201C';
+        position: absolute;
+        top: -1rem; left: 1.2rem;
+        font-family: 'Manrope', sans-serif;
+        font-size: 7rem;
+        font-weight: 800;
+        color: rgba(230,81,0,0.06);
+        line-height: 1;
+        pointer-events: none;
+    }
+    .t-card:hover { border-color: rgba(230,81,0,0.25); }
+    .t-text {
+        font-size: 0.98rem;
+        color: var(--text2);
+        line-height: 1.78;
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    .t-author {
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    #contact {
+        padding: clamp(5rem,10vw,10rem) 4vw;
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+    }
+    .contact-box {
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 2rem;
+        padding: clamp(2.5rem,5vw,5rem);
+        position: relative;
+        overflow: hidden;
+    }
+    .contact-box::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 10%; right: 10%;
+        height: 1.5px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .contact-box::after {
+        content: '';
+        position: absolute;
+        top: -150px; right: -150px;
+        width: 350px; height: 350px;
+        background: radial-gradient(circle, rgba(230,81,0,0.04) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .contact-h2 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(2rem,4.5vw,4rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        position: relative; z-index: 1;
+        color: var(--text);
+    }
+    .contact-sub {
+        font-size: clamp(0.9rem,1.5vw,1.05rem);
+        color: var(--text2);
+        margin-bottom: 2.5rem;
+        position: relative; z-index: 1;
+    }
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin-bottom: 1.2rem;
+        position: relative; z-index: 1;
+    }
+    @media (min-width: 576px) { .form-row { grid-template-columns: 1fr 1fr; } }
+
+    .f-input {
+        background: var(--surface);
+        border: 1px solid rgba(28,25,23,0.12);
+        border-radius: 0.75rem;
+        padding: 1rem 1.4rem;
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        width: 100%;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        position: relative; z-index: 1;
+    }
+    .f-input::placeholder { color: var(--text3); }
+    .f-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(230,81,0,0.08);
+    }
+
+    /* =============================================
+       FOOTER / CTA INLINE SECTION
+    ============================================= */
+    #footer-cta {
+        padding: clamp(6rem,12vw,12rem) 4vw clamp(3rem,5vw,5rem);
+        position: relative;
+        z-index: 5;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        overflow: hidden;
+    }
+    .footer-glow-bg {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        width: 900px; height: 450px;
+        background: radial-gradient(ellipse, rgba(230,81,0,0.045) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .footer-cta-h2 {
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(4rem, 14vw, 13rem);
+        font-weight: 800;
+        line-height: 0.85;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+        position: relative; z-index: 1;
+        overflow: hidden;
+        color: var(--text);
+    }
+    .footer-cta-h2 .line { display: block; overflow: hidden; }
+    .footer-cta-h2 .c-word { display: inline-block; transform: translateY(110%); }
+    .footer-cta-h2 .stroke-word {
+        -webkit-text-stroke: 2px rgba(28,25,23,0.35);
+        color: transparent;
+        display: inline-block;
+        transform: translateY(110%);
+    }
+
+    .footer-email {
+        display: inline-block;
+        font-family: 'Manrope', sans-serif;
+        font-size: clamp(1rem, 2.5vw, 2rem);
+        font-weight: 500;
+        color: var(--text);
+        border-bottom: 1.5px solid rgba(28,25,23,0.25);
+        padding-bottom: 0.5rem;
+        transition: border-color 0.3s, color 0.3s;
+        margin-bottom: 5rem;
+        position: relative; z-index: 1;
+    }
+    .footer-email:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .footer-bottom-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+        position: relative; z-index: 1;
+    }
+    @media (min-width: 768px) {
+        .footer-bottom-bar {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+    .footer-socials {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .footer-socials a {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text3);
+        transition: color 0.3s;
+    }
+    .footer-socials a:hover { color: var(--accent); }
+    .footer-copy {
+        font-size: 0.7rem;
+        color: var(--text3);
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* =============================================
+       SCROLL REVEAL HELPER
+    ============================================= */
+    .reveal {
+        opacity: 0;
+        transform: translateY(38px);
+        transition: opacity 0.85s cubic-bezier(0.19,1,0.22,1),
+                    transform 0.85s cubic-bezier(0.19,1,0.22,1);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       RESPONSIVE BREAKPOINTS
+    ============================================= */
+    @media (max-width: 991px) {
+        #hero { grid-template-columns: 1fr; text-align: center; align-items: center; justify-items: center; padding: 8rem 6vw 6rem; }
+        .hero-left { display: flex; flex-direction: column; align-items: center; }
+        .hero-tag { justify-content: center; }
+        .hero-orb { display: none; }
+        .hero-scroll { left: 50%; transform: translateX(-50%); }
+        .hero-btns { justify-content: center; }
+        .about-h2 { text-align: left; }
+        .nav-links, .btn-nav { display: none; }
+        .hamburger { display: flex; }
+    }
+    @media (max-width: 575px) {
+        #main-nav { padding: 1.2rem 5vw; }
+        .hero-btns { flex-direction: column; align-items: stretch; width: 100%; }
+        .btn-g-fill, .btn-g-ghost { justify-content: center; }
+        .footer-cta-h2 { font-size: clamp(3rem, 14vw, 7rem); }
+        .svs-block:hover { padding-left: 0.75rem; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         LAYER 0: AURORA + PARTICLES + NOISE
+    ========================================= -->
+    <div class="aurora-wrap">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    <div class="mouse-glow" id="mouse-glow"></div>
+    <div class="noise-layer"></div>
+    <canvas id="pcanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;"></canvas>
+
+    <!-- ========================================
+         CURSOR
+    ========================================= -->
+    <div class="cursor-dot hidden md:block" id="cdot"></div>
+    <div class="cursor-ring hidden md:block" id="cring"></div>
+
+    <!-- ========================================
+         PRELOADER
+    ========================================= -->
+    <div id="preloader">
+        <div class="pre-logo"><img src="logo-trimmed.png" alt="5P Media"></div>
+        <div class="pre-bar-wrap">
+            <div class="pre-bar shimmer-bar" id="pre-bar"></div>
+        </div>
+        <div class="pre-num" id="pre-num">0%</div>
+    </div>
+
+    <!-- ========================================
+         NAVIGATION
+    ========================================= -->
+    <nav id="main-nav">
+        <a href="index.html" class="nav-logo magnetic" aria-label="5P Media home"><img src="logo-trimmed.png" alt="5P Media"></a>
+
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <a href="contact.html" class="btn-nav magnetic hidden md:inline-block">Start a Project</a>
+
+        <button class="hamburger magnetic" id="ham" aria-label="Menu">
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+            <span class="ham-bar"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <nav id="mob-nav" aria-hidden="true">
+        <a href="about.html"  id="mob-about">About</a>
+        <a href="services.html" id="mob-services">Services</a>
+        <a href="#work"     id="mob-work">Work</a>
+        <a href="contact.html"  id="mob-contact">Contact</a>
+    </nav>
+
+    <!-- ========================================
+         MAIN
+    ========================================= -->
+    <main style="position:relative;z-index:5;">
+
+        <!-- ===== HERO ===== -->
+        <section id="hero">
+            <div class="hero-left">
+                <p class="hero-tag" id="hero-tag">Full-Service Digital &amp; Media Agency</p>
+
+                <h1 class="hero-h1" id="hero-h1">
+                    <span class="h-line">
+                        <span class="h-word">We Build</span>
+                    </span>
+                    <span class="h-line h-line--green">
+                        <span class="h-word">Digital</span>
+                    </span>
+                    <span class="h-line h-line--stroke">
+                        <span class="h-word">Experiences.</span>
+                    </span>
+                </h1>
+
+                <p class="hero-sub" id="hero-sub">
+                    At 5P Media, we craft immersive websites, data-driven marketing campaigns, and scalable digital products that help businesses create, manage, and evolve their online presence.
+                </p>
+
+                <div class="hero-btns" id="hero-btns">
+                    <a href="#contact" class="btn-g-fill magnetic">
+                        Start a Project
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#work" class="btn-g-ghost magnetic">
+                        View Our Work
+                    </a>
+                </div>
+            </div>
+
+            <!-- Decorative ring orb -->
+            <div class="hero-orb" id="hero-orb">
+                <div class="orb-ring"></div>
+                <div class="orb-ring"></div>
+                <div class="orb-ring"></div>
+                <div class="orb-core"></div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="hero-scroll" id="hero-scroll">
+                <div class="scrl-line"></div>
+                <span>Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about">
+            <div class="about-grid">
+                <!-- Left: Text -->
+                <div>
+                    <p class="eyebrow reveal">Know Us Better</p>
+                    <h2 class="about-h2 reveal">
+                        Your Gateway To The<br>Digital World.<br>
+                        <span class="g-word">It's How It Performs.</span>
+                    </h2>
+                    <p class="about-p reveal d1">
+                        At 5P Media, we’re more than just a media company — we’re your gateway to the digital world. With deep expertise in web development, digital marketing, and branding, we craft digital narratives that resonate and drive measurable growth.
+                    </p>
+                    <p class="about-p reveal d2">
+                        We help businesses shine online with innovative and cost-effective strategies. Whether you’re starting out or leveling up, our expert team provides authentic, tailored solutions to achieve your goals.
+                    </p>
+                    <a href="about.html" class="btn-g-ghost magnetic reveal d3" style="display:inline-flex; margin-top:0.5rem;">
+                        Learn More About Us
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0.5rem;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+                <!-- Right: Big stat -->
+                <div class="stat-card reveal d2">
+                    <span class="stat-big">10+</span>
+                    <span class="stat-big-label">Years of Excellence</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVICES ===== -->
+        <section id="services">
+            <div class="svs-header">
+                <div>
+                    <p class="eyebrow reveal">What We Offer</p>
+                    <h2 class="svs-h2 reveal">Our Authentic<br>Services.</h2>
+                </div>
+                <p class="svs-note reveal d1">
+                    Innovative and cost-effective business solutions designed to build, manage, and scale your brand's digital presence.
+                </p>
+            </div>
+
+            <div class="svs-list">
+                <div class="svs-block reveal">
+                    <div class="svs-num">01</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">Search Engine Optimization (SEO)</h3>
+                        <p class="svs-desc">Comprehensive organic growth strategies including Website SEO, Local SEO (GMB), App Store Optimization (ASO), E-Commerce SEO, and YouTube SEO to maximize visibility and qualified traffic.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">Website SEO</span>
+                            <span class="svs-chip">App Store SEO</span>
+                            <span class="svs-chip">Local SEO (GMB)</span>
+                            <span class="svs-chip">E-Commerce SEO</span>
+                            <span class="svs-chip">YouTube SEO</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+
+                <div class="svs-block reveal d1">
+                    <div class="svs-num">02</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">Google AdWords &amp; Performance Marketing</h3>
+                        <p class="svs-desc">Data-driven pay-per-click campaigns, lead generation strategies, and Google Shopping Ads structured to deliver high ROI, immediate sales leads, and lower acquisition costs.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">Lead Generation</span>
+                            <span class="svs-chip">PPC Management</span>
+                            <span class="svs-chip">Google Shopping Ads</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+
+                <div class="svs-block reveal d2">
+                    <div class="svs-num">03</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">Branding &amp; Social Media Marketing</h3>
+                        <p class="svs-desc">Building strong brand identities and executing targeted marketing campaigns across LinkedIn, YouTube, Content Marketing, and Facebook &amp; Instagram to engage audiences.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">LinkedIn Marketing</span>
+                            <span class="svs-chip">YouTube Marketing</span>
+                            <span class="svs-chip">Content Marketing</span>
+                            <span class="svs-chip">Facebook &amp; Insta Marketing</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+
+                <div class="svs-block reveal d3">
+                    <div class="svs-num">04</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">Designing &amp; Web Solutions</h3>
+                        <p class="svs-desc">Tailored web design services including CMS Websites, Static Website Design, PSD to WordPress, PSD to HTML5, Mobile Responsive Web Design, and ongoing Website Maintenance.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">CMS Website</span>
+                            <span class="svs-chip">Static Website</span>
+                            <span class="svs-chip">PSD to WordPress</span>
+                            <span class="svs-chip">PSD to HTML 5</span>
+                            <span class="svs-chip">Website Maintenance</span>
+                            <span class="svs-chip">Mobile Responsive</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+
+                <div class="svs-block reveal d4">
+                    <div class="svs-num">05</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">Development Services</h3>
+                        <p class="svs-desc">Custom software engineering offering Portal Development, Custom Application Development, E-Commerce Development platforms, Open Source Development, and Payment Gateway Integration.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">Portal Development</span>
+                            <span class="svs-chip">Custom App Development</span>
+                            <span class="svs-chip">E-Commerce Dev</span>
+                            <span class="svs-chip">Open Source</span>
+                            <span class="svs-chip">Payment Gateway</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+
+                <div class="svs-block reveal d4">
+                    <div class="svs-num">06</div>
+                    <div class="svs-body">
+                        <h3 class="svs-title">E-Commerce Management</h3>
+                        <p class="svs-desc">End-to-end account management and sales optimization for major marketplaces including Amazon, Meesho, Flipkart, Alibaba, JioMart, and Myntra.</p>
+                        <div class="svs-chips">
+                            <span class="svs-chip">Amazon Management</span>
+                            <span class="svs-chip">Meesho Management</span>
+                            <span class="svs-chip">Flipkart Management</span>
+                            <span class="svs-chip">Alibaba Management</span>
+                            <span class="svs-chip">JioMart Management</span>
+                            <span class="svs-chip">Myntra Management</span>
+                        </div>
+                    </div>
+                    <div class="svs-arrow">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PORTFOLIO ===== -->
+        <section id="work">
+            <div class="work-head">
+                <p class="eyebrow reveal">Selected Work</p>
+                <h2 class="work-h2 reveal">Projects<br>We're Proud Of.</h2>
+            </div>
+
+            <!-- Sticky stacking cards -->
+            <div class="pf-card" style="z-index:1;">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" class="pf-img" alt="Digital Portal">
+                <div class="pf-green-sheen"></div>
+                <div class="pf-overlay">
+                    <p class="pf-cat">Web Development</p>
+                    <h3 class="pf-title">Digital Portal</h3>
+                    <a href="#" class="pf-link">
+                        View Solution
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pf-card" style="z-index:2;">
+                <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=2794&auto=format&fit=crop" class="pf-img" alt="E-Commerce Scale">
+                <div class="pf-green-sheen"></div>
+                <div class="pf-overlay">
+                    <p class="pf-cat">E-Commerce Management</p>
+                    <h3 class="pf-title">Marketplace Scale</h3>
+                    <a href="#" class="pf-link">
+                        View Solution
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pf-card" style="z-index:3;">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2640&auto=format&fit=crop" class="pf-img" alt="Brand Strategy">
+                <div class="pf-green-sheen"></div>
+                <div class="pf-overlay">
+                    <p class="pf-cat">Branding &amp; Growth</p>
+                    <h3 class="pf-title">Brand Identity</h3>
+                    <a href="#" class="pf-link">
+                        View Solution
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STATS ===== -->
+        <section id="stats">
+            <div class="stats-inner">
+                <div>
+                    <p class="eyebrow reveal">By the Numbers</p>
+                    <h2 class="reveal" style="font-family:'Manrope',sans-serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:800;letter-spacing:-0.025em;line-height:0.92;">
+                        Real Achievements,<br>Authentic Results.
+                    </h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-cell" data-target="50">
+                        <span class="stat-val"><span class="cval">0</span><span class="stat-sfx">+</span></span>
+                        <span class="stat-lbl">Projects Completed</span>
+                    </div>
+                    <div class="stat-cell" data-target="30">
+                        <span class="stat-val"><span class="cval">0</span><span class="stat-sfx">+</span></span>
+                        <span class="stat-lbl">Happy Clients</span>
+                    </div>
+                    <div class="stat-cell" data-target="10">
+                        <span class="stat-val"><span class="cval">0</span><span class="stat-sfx">+</span></span>
+                        <span class="stat-lbl">Years of Excellence</span>
+                    </div>
+                    <div class="stat-cell" data-target="6">
+                        <span class="stat-val"><span class="cval">0</span><span class="stat-sfx"></span></span>
+                        <span class="stat-lbl">Service Categories</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <section id="testimonials">
+            <div class="testi-head">
+                <p class="eyebrow" style="justify-content:center;">Client Feedback</p>
+            </div>
+            <div class="marquee-wrap">
+                <div class="marquee-track" id="mq-track">
+                    <div class="t-card">
+                        <p class="t-text">"5P Media helped transform our online presence with their web design and SEO strategies. Professional team, fantastic communication, and excellent results."</p>
+                        <p class="t-author">Partner Client</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"Their e-commerce marketplace management boosted our sales across Amazon and Flipkart significantly. Highly reliable digital partner."</p>
+                        <p class="t-author">E-Commerce Brand</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"A complete end-to-end media agency. From lead generation ads to website maintenance, 5P Media handles everything seamlessly."</p>
+                        <p class="t-author">Business Owner</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"The branding and social media marketing campaigns gave our business strong visibility. Great strategy and execution."</p>
+                        <p class="t-author">Growth Client</p>
+                    </div>
+                    <!-- Clones for infinite loop -->
+                    <div class="t-card">
+                        <p class="t-text">"5P Media helped transform our online presence with their web design and SEO strategies. Professional team, fantastic communication, and excellent results."</p>
+                        <p class="t-author">Partner Client</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"Their e-commerce marketplace management boosted our sales across Amazon and Flipkart significantly. Highly reliable digital partner."</p>
+                        <p class="t-author">E-Commerce Brand</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"A complete end-to-end media agency. From lead generation ads to website maintenance, 5P Media handles everything seamlessly."</p>
+                        <p class="t-author">Business Owner</p>
+                    </div>
+                    <div class="t-card">
+                        <p class="t-text">"The branding and social media marketing campaigns gave our business strong visibility. Great strategy and execution."</p>
+                        <p class="t-author">Growth Client</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact">
+            <div class="contact-box reveal">
+                <h2 class="contact-h2">Start Your Digital Journey</h2>
+                <p class="contact-sub">Reach out to 5P Media today. Whether starting out or leveling up, our team is here to guide you.</p>
+
+                <form id="contact-form" style="position:relative;z-index:1;">
+                    <div class="form-row">
+                        <input type="text"  class="f-input" placeholder="Your Name" required>
+                        <input type="email" class="f-input" placeholder="Email Address (sales@5pmedia.com)" required>
+                    </div>
+                    <textarea class="f-input" rows="4" placeholder="Tell us about your web, SEO, or branding requirements" style="resize:vertical;margin-bottom:1.5rem;" required></textarea>
+                    <button type="submit" class="btn-g-fill magnetic" style="border:none;">
+                        Send Message
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER / CTA ===== -->
+        <footer id="footer-cta">
+            <div class="footer-glow-bg"></div>
+
+            <h2 class="footer-cta-h2" id="footer-h2">
+                <span class="line"><span class="c-word">Let's</span></span>
+                <span class="line"><span class="stroke-word">Talk.</span></span>
+            </h2>
+
+            <a href="mailto:sales@5pmedia.com" class="footer-email magnetic d-block" style="display:block;">
+                sales@5pmedia.com
+            </a>
+
+            <div style="font-size:0.9rem; color:var(--text2); margin-bottom: 2.5rem;">
+                +91 83085 78436 &nbsp;|&nbsp; Floor No. 3, Narmada Niwas, Acharya Society, Warje, Pune
+            </div>
+
+            <div class="footer-bottom-bar">
+                <ul class="footer-socials">
+                    <li><a href="#" class="magnetic">Instagram</a></li>
+                    <li><a href="#" class="magnetic">LinkedIn</a></li>
+                    <li><a href="#" class="magnetic">Twitter</a></li>
+                </ul>
+                <p class="footer-copy">&copy; 2024 5P Media. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </main><!-- /main -->
+
+    <!-- ========================================
+         SCRIPTS
+    ========================================= -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <script>
+    /* =============================================
+       INIT
+    ============================================= */
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* =============================================
+       LENIS SMOOTH SCROLL
+    ============================================= */
+    const lenis = new Lenis({
+        duration: 1.25,
+        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    function rafLoop(time) { lenis.raf(time); requestAnimationFrame(rafLoop); }
+    requestAnimationFrame(rafLoop);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    /* =============================================
+       MOUSE TRACKING
+    ============================================= */
+    const mouseGlow = document.getElementById('mouse-glow');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    window.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        mouseGlow.style.left = mx + 'px';
+        mouseGlow.style.top  = my + 'px';
+    });
+
+    /* =============================================
+       CURSOR
+    ============================================= */
+    const cdot  = document.getElementById('cdot');
+    const cring = document.getElementById('cring');
+
+    if (cdot && cring) {
+        const xDot  = gsap.quickTo(cdot,  'x', { duration: 0.10, ease: 'power3' });
+        const yDot  = gsap.quickTo(cdot,  'y', { duration: 0.10, ease: 'power3' });
+        const xRing = gsap.quickTo(cring, 'x', { duration: 0.30, ease: 'power3' });
+        const yRing = gsap.quickTo(cring, 'y', { duration: 0.30, ease: 'power3' });
+
+        window.addEventListener('mousemove', e => {
+            xDot(e.clientX); yDot(e.clientY);
+            xRing(e.clientX); yRing(e.clientY);
+        });
+
+        document.querySelectorAll('a, button, .svs-block').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    }
+
+    /* =============================================
+       NAVBAR — HIDE / SHOW + SCROLLED CLASS
+    ============================================= */
+    const nav = document.getElementById('main-nav');
+    let lastScrollY = 0;
+
+    lenis.on('scroll', e => {
+        const y = e.animatedScroll;
+        if (y > 60) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+        if (y > lastScrollY && y > 200) {
+            nav.style.transform = 'translateY(-100%)';
+        } else {
+            nav.style.transform = 'translateY(0)';
+        }
+        lastScrollY = y;
+    });
+
+    /* =============================================
+       MOBILE MENU
+    ============================================= */
+    const ham    = document.getElementById('ham');
+    const mobNav = document.getElementById('mob-nav');
+    let menuOpen = false;
+
+    ham?.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        ham.classList.toggle('open', menuOpen);
+        mobNav.classList.toggle('open', menuOpen);
+        mobNav.setAttribute('aria-hidden', String(!menuOpen));
+        document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        menuOpen = false;
+        ham.classList.remove('open');
+        mobNav.classList.remove('open');
+        mobNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }));
+
+    /* =============================================
+       CANVAS PARTICLE SYSTEM
+    ============================================= */
+    const canvas = document.getElementById('pcanvas');
+    const ctx    = canvas.getContext('2d');
+    let W = canvas.width  = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    });
+
+    const pts = Array.from({ length: 110 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 2 + 0.8,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        alpha: Math.random() * 0.5 + 0.25,
+        brand: Math.random() > 0.65
+    }));
+
+    function drawPts() {
+        ctx.clearRect(0, 0, W, H);
+        pts.forEach(p => {
+            const ddx = mx - p.x, ddy = my - p.y;
+            const dist = Math.hypot(ddx, ddy);
+            if (dist < 120) {
+                p.x -= (ddx / dist) * 0.35;
+                p.y -= (ddy / dist) * 0.35;
+            }
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.brand
+                ? `rgba(230,81,0,${p.alpha})`
+                : `rgba(28,25,23,${p.alpha * 0.5})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(drawPts);
+    }
+    drawPts();
+
+    /* =============================================
+       PRELOADER → INIT HERO
+    ============================================= */
+    const preBar = document.getElementById('pre-bar');
+    const preNum = document.getElementById('pre-num');
+    let pct = 0;
+
+    const loader = setInterval(() => {
+        pct += Math.floor(Math.random() * 12) + 5;
+        if (pct >= 100) {
+            pct = 100;
+            clearInterval(loader);
+        }
+        preBar.style.width = pct + '%';
+        preNum.textContent = pct + '%';
+
+        if (pct >= 100) {
+            setTimeout(() => {
+                gsap.to('#preloader', {
+                    yPercent: -100,
+                    duration: 1.0,
+                    ease: 'power4.inOut',
+                    onComplete: heroIn
+                });
+            }, 280);
+        }
+    }, 55);
+
+    function heroIn() {
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+        tl.to('#hero-tag', { opacity: 1, y: 0, duration: 0.8 })
+          .to('.h-word', {
+              y: '0%',
+              filter: 'blur(0px)',
+              duration: 1.2,
+              stagger: 0.12
+          }, '-=0.5')
+          .to('#hero-sub',  { opacity: 1, y: 0, duration: 0.9 }, '-=0.7')
+          .to('#hero-btns', { opacity: 1, y: 0, duration: 0.8 }, '-=0.7')
+          .to('#hero-orb',  { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.4)' }, '-=1.0')
+          .to('#hero-scroll', { opacity: 1, duration: 0.8 }, '-=0.6');
+    }
+
+    /* =============================================
+       SCROLL REVEALS (Intersection Observer)
+    ============================================= */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* =============================================
+       STATS COUNTER ANIMATION
+    ============================================= */
+    const statCells = document.querySelectorAll('.stat-cell');
+    let counted = false;
+
+    ScrollTrigger.create({
+        trigger: '#stats',
+        start: 'top 75%',
+        onEnter: () => {
+            if (counted) return;
+            counted = true;
+            statCells.forEach((cell, idx) => {
+                setTimeout(() => {
+                    cell.classList.add('active');
+                    const target = parseInt(cell.dataset.target, 10);
+                    const cval   = cell.querySelector('.cval');
+                    let cur = 0;
+                    const step = Math.max(1, Math.ceil(target / 40));
+                    const timer = setInterval(() => {
+                        cur += step;
+                        if (cur >= target) { cur = target; clearInterval(timer); }
+                        cval.textContent = cur;
+                    }, 35);
+                }, idx * 140);
+            });
+        }
+    });
+
+    /* =============================================
+       TESTIMONIALS MARQUEE (GSAP)
+    ============================================= */
+    const track = document.getElementById('mq-track');
+    if (track) {
+        gsap.to(track, {
+            xPercent: -50,
+            ease: 'none',
+            duration: 25,
+            repeat: -1
+        });
+        track.addEventListener('mouseenter', () => gsap.globalTimeline.pause());
+        track.addEventListener('mouseleave', () => gsap.globalTimeline.play());
+    }
+
+    /* =============================================
+       FOOTER CTA REVEAL (GSAP)
+    ============================================= */
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '#footer-cta',
+            start: 'top 75%'
+        }
+    }).to('.c-word, .stroke-word', {
+        y: '0%',
+        duration: 1.2,
+        ease: 'power4.out',
+        stagger: 0.15
+    });
+
+    /* =============================================
+       MAGNETIC HOVER EFFECT
+    ============================================= */
+    function initMagnetic() {
+        document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', function(e) {
+                const r = this.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width  / 2;
+                const y = e.clientY - r.top  - r.height / 2;
+                gsap.to(this, { x: x * 0.32, y: y * 0.32, duration: 0.5, ease: 'power3.out' });
+            });
+            el.addEventListener('mouseleave', function() {
+                gsap.to(this, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1, 0.55)' });
+            });
+        });
+    }
+    initMagnetic();
+
+    /* =============================================
+       PAGE TRANSITION INTERCEPT
+    ============================================= */
+    document.querySelectorAll('a[href]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.includes('.html') && !href.startsWith('#')) {
+                e.preventDefault();
+                gsap.fromTo('#preloader',
+                    { yPercent: 100 },
+                    { yPercent: 0, duration: 0.75, ease: 'power4.inOut',
+                      onComplete: () => { window.location.href = href; }
+                    }
+                );
+            }
+        });
+    });
+
+    /* =============================================
+       FORM SUBMIT (prevent default)
+    ============================================= */
+    document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        const orig = btn.innerHTML;
+        btn.innerHTML = 'Sent! ✓';
+        btn.style.background = '#e65100';
+        btn.style.color = '#ffffff';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    });
+    </script>
+
+</body>
+</html>

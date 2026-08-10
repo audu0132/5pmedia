@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | 5P Media — Connect With Our Team</title>
+    <meta name="description" content="Contact 5P Media in Warje, Pune. Reach out via email sales@5pmedia.com or call +91 8308578436 for web development, SEO, branding, and digital marketing inquiries.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="output.css">
+
+    <style>
+    /* Hide native scrollbar */
+    ::-webkit-scrollbar { display: none; }
+    html {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+        /* =========================================
+           BASE RESET & DESIGN TOKENS
+        ========================================= */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --brand: #e65100;
+            --brand-start: #e65100;
+            --brand-end: #d84315;
+            --bg-light: #faf7f2;
+            --bg-surface: #f3efe6;
+            --bg-card: #fdfbf7;
+            --text-dark: #1c1917;
+            --text-sub: rgba(28,25,23,0.72);
+            --text-muted: rgba(28,25,23,0.45);
+            --border-subtle: rgba(28,25,23,0.09);
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-display { font-family: 'Manrope', sans-serif; }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+        /* =========================================
+           PRELOADER & NOISE
+        ========================================= */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background-color: var(--bg-light);
+            z-index: 9990;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            font-family: 'Manrope', sans-serif;
+            transform-origin: top;
+        }
+        .preloader span { color: var(--brand); }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* =========================================
+           CUSTOM CURSOR
+        ========================================= */
+        body, a, button, .cursor-pointer { cursor: none !important; }
+        .cursor-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+        }
+        .custom-cursor {
+            width: 16px; height: 16px;
+            background-color: var(--text-dark);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease;
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+        .nav-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+        .nav-logo img {
+            width: 160px;
+            height: auto;
+            display: block;
+            max-width: 100%;
+        }
+        @media (max-width: 640px) {
+            .nav-logo img { width: 135px; }
+        }
+
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            color: var(--text-sub);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 100%; height: 1.5px;
+            background-color: var(--brand);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .nav-link.active-page {
+            color: var(--brand);
+        }
+        .nav-link.active-page::after {
+            transform: scaleX(1);
+            background-color: var(--brand);
+        }
+
+        /* =========================================
+           CONTACT HERO
+        ========================================= */
+        .contact-hero {
+            position: relative;
+            padding: 10rem 2.5rem 5rem;
+            background: linear-gradient(160deg, #faf7f2 0%, #f3efe6 60%, #eae3d5 100%);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .hero-eyebrow {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--brand);
+            margin-bottom: 1.5rem;
+        }
+        .hero-headline {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(3.5rem, 9vw, 9.5rem);
+            font-weight: 800;
+            line-height: 0.88;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-sub);
+            max-width: 55ch;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           CONTACT SECTION GRID
+        ========================================= */
+        .contact-section {
+            padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (min-width: 992px) {
+            .contact-grid { grid-template-columns: 1.2fr 0.8fr; }
+        }
+
+        .c-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.75rem;
+            padding: clamp(2rem, 4vw, 3.5rem);
+            box-shadow: 0 10px 40px rgba(28,25,23,0.04);
+        }
+
+        .f-input {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.85rem;
+            padding: 1rem 1.4rem;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .f-input::placeholder { color: var(--text-muted); }
+        .f-input:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(230,81,0,0.08);
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            border: none;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        .btn-submit:hover {
+            background: var(--brand);
+            box-shadow: 0 8px 30px rgba(230,81,0,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Contact Details Cards */
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.35s ease, border-color 0.35s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(230,81,0,0.3);
+        }
+        .info-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brand);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .info-val {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* WhatsApp CTA */
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25d366;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 1rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: transform 0.25s, box-shadow 0.25s;
+            margin-top: 1rem;
+        }
+        .wa-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37,211,102,0.35);
+            color: #ffffff;
+        }
+
+        /* =========================================
+           FAQ ACCORDION
+        ========================================= */
+        .faq-section {
+            background: var(--bg-surface);
+            padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem);
+            border-top: 1px solid var(--border-subtle);
+        }
+        .faq-item {
+            border-top: 1px solid var(--border-subtle);
+            padding: 1.8rem 0;
+            cursor: pointer;
+        }
+        .faq-item:last-child { border-bottom: 1px solid var(--border-subtle); }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: color 0.3s;
+        }
+        .faq-item.active .faq-question, .faq-item:hover .faq-question {
+            color: var(--brand);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.4s ease;
+            font-size: 1rem;
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+            color: var(--brand);
+        }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* =========================================
+           LOCATION MAP CONTAINER
+        ========================================= */
+        .map-section {
+            padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem);
+        }
+        .map-box {
+            border: 1px solid var(--border-subtle);
+            border-radius: 2rem;
+            overflow: hidden;
+            height: 380px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        .footer-cta {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 4rem clamp(1.5rem, 5vw, 3.5rem) 2.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.19,1,0.22,1);
+        }
+        .reveal-up.in-view { opacity: 1; transform: translateY(0); }
+        .magnetic { display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="preloader"><span>5P</span> MEDIA</div>
+
+    <div class="cursor-wrapper">
+        <div class="custom-cursor"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 md:px-10 py-6 flex justify-between items-center" style="color: var(--text-dark);">
+        <a href="index.html" class="nav-logo magnetic" aria-label="5P Media home"><img src="logo-trimmed.png" alt="5P Media"></a>
+        <div class="hidden md:flex gap-8 text-sm font-medium tracking-tight" style="font-family: 'Inter', sans-serif;">
+            <a href="index.html" class="nav-link magnetic hover:opacity-70 transition-opacity">Home</a>
+            <a href="about.html" class="nav-link magnetic hover:opacity-70 transition-opacity">About</a>
+            <a href="services.html" class="nav-link magnetic hover:opacity-70 transition-opacity">Services</a>
+            <a href="index.html#work" class="nav-link magnetic hover:opacity-70 transition-opacity">Work</a>
+            <a href="contact.html" class="nav-link active-page magnetic">Contact</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-sm uppercase tracking-widest font-medium magnetic" style="background:none; border:none; color: inherit;">Menu</button>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-nav" class="fixed inset-0 z-40 flex flex-col justify-center items-center gap-8 pointer-events-none opacity-0 transition-opacity duration-500" style="background: var(--bg-light);">
+        <a href="index.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">Home</a>
+        <a href="about.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">About</a>
+        <a href="services.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">Services</a>
+        <a href="index.html#work" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">Work</a>
+        <a href="contact.html" class="font-display font-bold text-4xl" style="color: var(--brand);">Contact</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HERO -->
+        <section class="contact-hero">
+            <div class="max-w-6xl mx-auto">
+                <p class="hero-eyebrow">Start Your Digital Journey</p>
+                <h1 class="hero-headline">
+                    Let's Build<br><span style="color:var(--brand);">Together.</span>
+                </h1>
+                <p class="hero-sub">
+                    Whether starting out or leveling up, our expert team at 5P Media is here to guide your web, marketing, and marketplace success.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM & DETAILS GRID -->
+        <section class="contact-section">
+            <div class="contact-grid">
+                
+                <!-- Left: Form -->
+                <div class="c-card reveal-up">
+                    <h2 style="font-family:'Manrope',sans-serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;margin-bottom:0.75rem;">Send Us A Message</h2>
+                    <p style="color:var(--text-sub);margin-bottom:2rem;font-size:0.98rem;">Fill out the form below and we’ll get back to you promptly.</p>
+                    
+                    <form id="contact-page-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);font-weight:700;display:block;margin-bottom:0.4rem;">Your Name</label>
+                                <input type="text" class="f-input" placeholder="e.g. John Doe" required>
+                            </div>
+                            <div>
+                                <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);font-weight:700;display:block;margin-bottom:0.4rem;">Email Address</label>
+                                <input type="email" class="f-input" placeholder="sales@5pmedia.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);font-weight:700;display:block;margin-bottom:0.4rem;">Subject / Service Requirement</label>
+                            <input type="text" class="f-input" placeholder="Website Development, SEO, AdWords, Branding..." required>
+                        </div>
+                        <div class="mb-6">
+                            <label style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);font-weight:700;display:block;margin-bottom:0.4rem;">Project Message</label>
+                            <textarea class="f-input" rows="4" placeholder="Tell us about your project goals..." style="resize:vertical;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit magnetic">
+                            Send Message
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right: Authentic Contact Details -->
+                <div class="reveal-up">
+                    <div class="info-card">
+                        <div class="info-label">Email Us Directly</div>
+                        <div class="info-val"><a href="mailto:sales@5pmedia.com" style="color:inherit;text-decoration:none;">sales@5pmedia.com</a></div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-label">Call Our Team</div>
+                        <div class="info-val"><a href="tel:8308578436" style="color:inherit;text-decoration:none;">+91 83085 78436</a></div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-label">Office Address</div>
+                        <div class="info-val" style="font-size:1.05rem;line-height:1.6;font-family:'Inter',sans-serif;font-weight:500;">
+                            Floor No. 3, Narmada Niwas, Acharya Housing Society, Warje, Pune, Maharashtra 411058
+                        </div>
+                    </div>
+
+                    <!-- Direct WhatsApp CTA -->
+                    <div class="text-left mt-4">
+                        <a href="https://wa.me/918308578436" target="_blank" class="wa-btn magnetic">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                            WhatsApp Us Instantly
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AUTHENTIC FAQ ACCORDION -->
+        <section class="faq-section">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="hero-eyebrow" style="display:inline-block;">Got Questions?</span>
+                    <h2 style="font-family:'Manrope',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;line-height:0.95;">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item reveal-up">
+                        <div class="faq-question">
+                            <span>Do I really need a website?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes. A majority of consumers research and find local businesses online, making a website crucial for your company’s success. 5P Media builds custom websites that are beautiful, responsive, and powerful.
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal-up">
+                        <div class="faq-question">
+                            <span>How to use Facebook for marketing?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Facebook is the world’s largest online social network. 5P Media is a social media marketing agency. We help businesses increase their exposure and popularity using the power of Facebook and Instagram ads to target your exact audience and measure campaign performance.
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal-up">
+                        <div class="faq-question">
+                            <span>What is local SEO?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Local SEO is not only a goal; it is a necessity. Localized search is an essential part of your digital marketing strategy. We help you optimize your presence across Google My Business to effectively attract local customers.
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal-up">
+                        <div class="faq-question">
+                            <span>What is social media Marketing?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Social media marketing is a key component of digital marketing, encompassing the use of Web-based technologies to reach targeted audiences with customized messages that influence buying decisions and build brand loyalty.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATION MAP BOX -->
+        <section class="map-section">
+            <div class="max-w-6xl mx-auto text-center mb-6">
+                <span class="hero-eyebrow" style="display:inline-block;">Visit Us</span>
+                <h2 style="font-family:'Manrope',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;">Our Location in Pune</h2>
+            </div>
+            <div class="map-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.7436!2d73.8062728!3d18.4836448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb8d0000001%3A0x123456789!2sAcharya%20Housing%20Society%2C%20Warje%2C%20Pune!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-cta">
+        <div class="max-w-6xl mx-auto w-full flex flex-col md:flex-row justify-between items-center text-sm text-stone-500">
+            <p>&copy; 2024 5P Media. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-amber-700 transition-colors">Instagram</a>
+                <a href="#" class="hover:text-amber-700 transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-amber-700 transition-colors">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+
+        const preloader = document.querySelector('.preloader');
+        setTimeout(() => {
+            gsap.to(preloader, { yPercent: -100, duration: 1, ease: 'power4.inOut' });
+        }, 400);
+
+        const cursorWrapper = document.querySelector('.cursor-wrapper');
+        const customCursor = document.querySelector('.custom-cursor');
+        let xTo = gsap.quickTo(cursorWrapper, 'x', { duration: 0.12, ease: 'power3' });
+        let yTo = gsap.quickTo(cursorWrapper, 'y', { duration: 0.12, ease: 'power3' });
+
+        window.addEventListener('mousemove', e => {
+            if (cursorWrapper.style.opacity !== '1') cursorWrapper.style.opacity = 1;
+            xTo(e.clientX); yTo(e.clientY);
+        });
+
+        document.querySelectorAll('a, button').forEach(link => {
+            link.addEventListener('mouseenter', () => gsap.to(customCursor, { scale: 3.5, backgroundColor: 'transparent', border: '1px solid #e65100', duration: 0.3 }));
+            link.addEventListener('mouseleave', () => gsap.to(customCursor, { scale: 1, backgroundColor: '#1c1917', border: 'none', duration: 0.3 }));
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        let mobileNavOpen = false;
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNavOpen = !mobileNavOpen;
+            mobileNav.style.opacity = mobileNavOpen ? '1' : '0';
+            mobileNav.style.pointerEvents = mobileNavOpen ? 'all' : 'none';
+            mobileMenuBtn.textContent = mobileNavOpen ? 'Close' : 'Menu';
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+
+        // FAQ accordion toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Contact form submit intercept
+        document.getElementById('contact-page-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const orig = btn.innerHTML;
+            btn.innerHTML = 'Message Sent! ✓';
+            btn.style.background = '#e65100';
+            setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 3000);
+        });
+
+        document.querySelectorAll('a[href]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = this.getAttribute('href');
+                if (target && target.includes('.html')) {
+                    e.preventDefault();
+                    gsap.fromTo(preloader, { yPercent: 100 }, { yPercent: 0, duration: 0.8, ease: 'power4.inOut', onComplete: () => { window.location.href = target; } });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
