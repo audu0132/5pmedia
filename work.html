@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work | 5P Media — Premium Creative Portfolio</title>
+    <meta name="description" content="Explore selected work and digital experiences built by 5P Media — digital marketing, web development, and branding for ambitious brands.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="output.css">
+
+    <style>
+    /* Hide native scrollbar */
+    ::-webkit-scrollbar { display: none; }
+    html {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+        --brand: #e65100;
+        --brand-start: #e65100;
+        --brand-end: #d84315;
+        --bg-light: #faf7f2;
+        --bg-surface: #f3efe6;
+        --bg-card: #fdfbf7;
+        --text-dark: #1c1917;
+        --text-sub: rgba(28,25,23,0.72);
+        --text-muted: rgba(28,25,23,0.45);
+        --border-subtle: rgba(28,25,23,0.09);
+    }
+
+    body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display { font-family: 'Manrope', sans-serif; }
+
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* =========================================
+       PRELOADER
+    ========================================= */
+    .preloader {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100vh;
+        background-color: var(--bg-light);
+        z-index: 9990;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--text-dark);
+        font-size: clamp(3rem, 10vw, 8rem);
+        font-weight: 800;
+        font-family: 'Manrope', sans-serif;
+        transform-origin: top;
+    }
+    .preloader span { color: var(--brand); }
+
+    /* =========================================
+       NOISE OVERLAY
+    ========================================= */
+    .noise-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        pointer-events: none;
+        z-index: 9997;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* =========================================
+       CUSTOM CURSOR
+    ========================================= */
+    body, a, button, .cursor-pointer { cursor: none !important; }
+    .cursor-wrapper {
+        position: fixed;
+        top: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+    }
+    .custom-cursor {
+        width: 16px; height: 16px;
+        background-color: var(--text-dark);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s ease;
+    }
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+    .nav-logo {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        line-height: 0;
+    }
+    .nav-logo img {
+        width: 160px;
+        height: auto;
+        display: block;
+        max-width: 100%;
+    }
+    @media (max-width: 640px) {
+        .nav-logo img { width: 135px; }
+    }
+
+    .nav-link {
+        position: relative;
+        text-decoration: none;
+        color: var(--text-sub);
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; left: 0;
+        width: 100%; height: 1.5px;
+        background-color: var(--brand);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    .nav-link.active-page {
+        color: var(--brand);
+    }
+    .nav-link.active-page::after {
+        transform: scaleX(1);
+        background-color: var(--brand);
+    }
+
+    /* =========================================
+       CONTENT WRAPPER
+    ========================================= */
+    .content-wrapper {
+        position: relative;
+        z-index: 10;
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        box-shadow: 0 20px 80px rgba(28,25,23,0.06);
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    /* =========================================
+       WORD SPLIT ANIMATION HELPERS
+    ========================================= */
+    .line { overflow: hidden; display: block; }
+    .word-inner {
+        display: inline-block;
+        transform: translateY(110%);
+        will-change: transform;
+    }
+
+    /* =========================================
+       FILTER & SHOWCASE GRID
+    ========================================= */
+    .filter-btn {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.65rem 1.5rem;
+        border-radius: 100px;
+        border: 1px solid var(--border-subtle);
+        background-color: transparent;
+        color: var(--text-sub);
+        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .filter-btn:hover {
+        color: var(--text-dark);
+        border-color: var(--text-dark);
+    }
+    .filter-btn.active {
+        background-color: var(--brand);
+        border-color: var(--brand);
+        color: #ffffff;
+        box-shadow: 0 4px 18px rgba(230,81,0,0.2);
+    }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 2rem;
+        transition: opacity 0.3s ease;
+    }
+    @media (min-width: 768px) {
+        .project-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    @media (min-width: 1024px) {
+        .project-grid {
+            gap: 3rem;
+        }
+    }
+
+    .project-card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        will-change: transform, opacity;
+    }
+    .project-card.hidden-card {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        pointer-events: none;
+        position: absolute;
+        width: 0; height: 0;
+        overflow: hidden;
+        border: none;
+        padding: 0; margin: 0;
+    }
+    .project-image-wrapper {
+        position: relative;
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        background-color: var(--bg-surface);
+    }
+    .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .project-card:hover .project-image {
+        transform: scale(1.05);
+    }
+    .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(28,25,23,0.06);
+    }
+    .project-info {
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .project-meta {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--brand);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    .project-title {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.75rem;
+        line-height: 1.25;
+    }
+    .project-desc {
+        font-size: 0.88rem;
+        color: var(--text-sub);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        flex-grow: 1;
+    }
+    .project-link {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        margin-top: auto;
+    }
+    .project-link svg {
+        transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .project-card:hover .project-link {
+        color: var(--brand);
+    }
+    .project-card:hover .project-link svg {
+        transform: translate(3px, -3px);
+    }
+
+    /* Magnetic animation helper */
+    .magnetic { display: inline-block; }
+
+    /* Preloader & noise defaults */
+    .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+    .reveal-up.in-view { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="preloader"><span>5P</span> MEDIA</div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-wrapper">
+        <div class="custom-cursor"></div>
+    </div>
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
+    <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 md:px-10 py-6 flex justify-between items-center" style="color: var(--text-dark);">
+        <a href="index.html" class="nav-logo magnetic" aria-label="5P Media home"><img src="logo-trimmed.png" alt="5P Media"></a>
+        <div class="hidden md:flex gap-8 text-sm font-medium tracking-tight" style="font-family: 'Inter', sans-serif;">
+            <a href="about.html" class="nav-link magnetic hover:opacity-70 transition-opacity">ABOUT US</a>
+            <a href="work.html" class="nav-link active-page magnetic">WORK</a>
+            <a href="services.html" class="nav-link magnetic hover:opacity-70 transition-opacity">5P SERVICES</a>
+            <a href="contact.html" class="nav-link magnetic hover:opacity-70 transition-opacity">CONTACT</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-sm uppercase tracking-widest font-medium magnetic" style="background:none; border:none; color: inherit;">Menu</button>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-nav" class="fixed inset-0 z-40 flex flex-col justify-center items-center gap-8 pointer-events-none opacity-0 transition-opacity duration-500" style="background: var(--bg-light);">
+        <a href="about.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">ABOUT US</a>
+        <a href="work.html" class="font-display font-bold text-4xl" style="color: var(--brand);">WORK</a>
+        <a href="services.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">5P SERVICES</a>
+        <a href="contact.html" class="font-display font-bold text-4xl text-stone-900 hover:opacity-60 transition-opacity">CONTACT</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrapper">
+        <main>
+            <!-- HERO -->
+            <section class="pt-32 pb-16 px-6 md:px-10 max-w-6xl mx-auto flex flex-col justify-center min-h-[50vh]">
+                <p class="text-sm font-bold tracking-widest uppercase mb-6" style="color: var(--brand);">Portfolio</p>
+                <h1 id="hero-heading" class="font-display text-5xl md:text-7xl font-bold tracking-tight mb-8 max-w-4xl" style="line-height: 1.1;">
+                    <span class="line"><span class="word-inner">OUR</span></span>
+                    <span class="line"><span class="word-inner">WORK.</span></span>
+                </h1>
+                <p id="hero-sub" class="text-lg md:text-xl text-stone-600 max-w-2xl leading-relaxed opacity-0 transform translate-y-6 transition-all duration-1000 ease-out" style="font-family: 'Inter', sans-serif;">
+                    Selected projects, digital experiences, and creative solutions we've built for ambitious brands.
+                </p>
+            </section>
+
+            <!-- FILTER CONTROLS -->
+            <section class="px-6 md:px-10 max-w-6xl mx-auto mb-12">
+                <div class="flex flex-wrap gap-3 items-center" id="filter-wrapper">
+                    <button class="filter-btn active magnetic" data-filter="all">All</button>
+                    <button class="filter-btn magnetic" data-filter="web">Web</button>
+                    <button class="filter-btn magnetic" data-filter="branding">Branding</button>
+                    <button class="filter-btn magnetic" data-filter="marketing">Marketing</button>
+                    <button class="filter-btn magnetic" data-filter="design">Design</button>
+                </div>
+            </section>
+
+            <!-- PROJECTS SHOWCASE GRID -->
+            <section class="px-6 md:px-10 max-w-6xl mx-auto pb-24">
+                <div class="project-grid" id="project-grid-container">
+                    <!-- Project 1 -->
+                    <div class="project-card reveal-up" data-category="web design">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Digital Portal">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">Web Development</span>
+                            <h3 class="project-title">Digital Portal</h3>
+                            <p class="project-desc">A fully responsive next-generation portal designed for ecological resource management and environmental analytics.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card reveal-up" data-category="marketing">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Marketplace Scale">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">Digital Marketing</span>
+                            <h3 class="project-title">Marketplace Scale</h3>
+                            <p class="project-desc">Strategic campaign execution and analytics integration unlocking massive ROI across global digital e-commerce channels.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card reveal-up" data-category="branding">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Brand Strategy">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">Branding & Strategy</span>
+                            <h3 class="project-title">Aura Brand Identity</h3>
+                            <p class="project-desc">Premium brand strategy, tone rules, and digital styling frameworks built to position Aura as a modern luxury leader.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card reveal-up" data-category="web design">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Neo FinTech Interface">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">UI/UX Design</span>
+                            <h3 class="project-title">Neo FinTech Interface</h3>
+                            <p class="project-desc">Immersive financial analytics application dashboard prioritizing usability, data visuals, and premium interactive layouts.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card reveal-up" data-category="marketing">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Apex Campaign Strategy">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">Social Media</span>
+                            <h3 class="project-title">Apex Social Engine</h3>
+                            <p class="project-desc">Highly interactive, data-driven content marketing campaigns designed to capture gen-z mindshare for Apex.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="project-card reveal-up" data-category="branding design">
+                        <div class="project-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" class="project-image" alt="Origin Spatial Art">
+                        </div>
+                        <div class="project-info">
+                            <span class="project-meta">Creative Design</span>
+                            <h3 class="project-title">Origin Spatial Art</h3>
+                            <p class="project-desc">Modern architectural graphics, custom brand assets, and experiential creative design for physical showcase retail rooms.</p>
+                            <a href="#" class="project-link magnetic">
+                                View Solution
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- =========================================
+             FOOTER CTA
+        ========================================= -->
+        <section class="footer-cta bg-stone-100 border-t border-stone-200 py-24 text-center" id="contact" style="padding-top: 6rem; padding-bottom: 6rem;">
+            <div>
+                <p style="font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--brand); font-weight: 700; margin-bottom: 2rem; font-family: 'Inter', sans-serif;">Ready To Grow?</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-8" style="line-height: 1.2;">
+                    Join Us On This<br>Digital Journey.
+                </h2>
+                <a href="mailto:sales@5pmedia.com" class="text-xl md:text-2xl font-semibold border-b border-stone-900 pb-1 hover:text-amber-700 hover:border-amber-700 transition-colors duration-300 magnetic" style="margin-top: 2rem; display: inline-block;">sales@5pmedia.com</a>
+            </div>
+
+            <div class="text-xs text-stone-500 mt-10">
+                Phone: +91 8308578436 &nbsp;|&nbsp; Address: Floor No. 3, Narmada Niwas, Acharya Housing Society, Warje, Pune, Maharashtra 411058
+            </div>
+
+            <div class="flex justify-between items-center max-w-6xl mx-auto mt-16 pt-8 border-t border-stone-200 px-6">
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="hover:text-amber-700 transition-colors duration-300 magnetic">Instagram</a>
+                    <a href="#" class="hover:text-amber-700 transition-colors duration-300 magnetic">LinkedIn</a>
+                    <a href="#" class="hover:text-amber-700 transition-colors duration-300 magnetic">Twitter</a>
+                </div>
+                <p class="text-xs text-stone-500">&copy; 2024 5P Media. All rights reserved.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- =========================================
+         SCRIPTS
+    ========================================= -->
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* =========================================
+           SMOOTH SCROLL — LENIS
+        ========================================= */
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+        });
+
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+        lenis.on('scroll', ScrollTrigger.update);
+
+        /* =========================================
+           PRELOADER
+        ========================================= */
+        const preloader = document.querySelector('.preloader');
+        setTimeout(() => {
+            gsap.to(preloader, {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut',
+                onComplete: initHero
+            });
+        }, 500);
+
+        /* =========================================
+           HERO ENTRANCE ANIMATIONS
+        ========================================= */
+        function initHero() {
+            // Text reveal animation
+            gsap.to('#hero-heading .word-inner', {
+                y: 0,
+                duration: 1.2,
+                ease: 'power4.out',
+                stagger: 0.15
+            });
+
+            // Subtitle fade-in
+            const heroSub = document.getElementById('hero-sub');
+            heroSub.classList.remove('opacity-0', 'translate-y-6');
+
+            // Fade-up animation for project cards
+            ScrollTrigger.batch(".reveal-up", {
+                onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, ease: "power4.out", stagger: 0.15, overwrite: "auto" }),
+                once: true
+            });
+        }
+
+        // Trigger in-view fallback in case preloader completes early
+        document.querySelectorAll('.reveal-up').forEach((el, index) => {
+            ScrollTrigger.create({
+                trigger: el,
+                start: "top 85%",
+                onEnter: () => {
+                    gsap.to(el, { opacity: 1, y: 0, duration: 1.2, ease: "power4.out", delay: index * 0.05 });
+                }
+            });
+        });
+
+        /* =========================================
+           CUSTOM CURSOR & MOUSE HOVERS
+        ========================================= */
+        const cursorWrapper = document.querySelector('.cursor-wrapper');
+        const customCursor = document.querySelector('.custom-cursor');
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+
+        window.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            
+            gsap.to(cursorWrapper, {
+                x: cursorX,
+                y: cursorY,
+                duration: 0.1,
+                ease: 'power2.out',
+                onStart: () => { cursorWrapper.style.opacity = 1; }
+            });
+        });
+
+        // Hover scale effects on links and buttons
+        document.querySelectorAll('a, button, .filter-btn').forEach(elem => {
+            elem.addEventListener('mouseenter', () => {
+                gsap.to(customCursor, { scale: 2.2, backgroundColor: 'var(--brand)', duration: 0.2 });
+            });
+            elem.addEventListener('mouseleave', () => {
+                gsap.to(customCursor, { scale: 1, backgroundColor: 'var(--text-dark)', duration: 0.2 });
+            });
+        });
+
+        /* =========================================
+           MAGNETIC ANIMATIONS
+        ========================================= */
+        document.querySelectorAll('.magnetic').forEach(elem => {
+            elem.addEventListener('mousemove', function(e) {
+                const bound = this.getBoundingClientRect();
+                const x = e.clientX - bound.left - (bound.width / 2);
+                const y = e.clientY - bound.top - (bound.height / 2);
+                gsap.to(this, {
+                    x: x * 0.35,
+                    y: y * 0.35,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            elem.addEventListener('mouseleave', function() {
+                gsap.to(this, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'power3.out'
+                });
+            });
+        });
+
+        /* =========================================
+           CATEGORY FILTERING LOGIC
+        ========================================= */
+        const filterWrapper = document.getElementById('filter-wrapper');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterWrapper.addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-btn');
+            if (!btn) return;
+
+            // Update active button state
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterVal = btn.getAttribute('data-filter');
+
+            // Smoothly animate transition between projects
+            gsap.to('#project-grid-container', {
+                opacity: 0.2,
+                duration: 0.25,
+                ease: 'power2.out',
+                onComplete: () => {
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (filterVal === 'all' || categories.includes(filterVal)) {
+                            card.classList.remove('hidden-card');
+                        } else {
+                            card.classList.add('hidden-card');
+                        }
+                    });
+
+                    // Refresh ScrollTrigger calculations
+                    ScrollTrigger.refresh();
+
+                    gsap.to('#project-grid-container', {
+                        opacity: 1,
+                        duration: 0.35,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+
+        /* =========================================
+           MOBILE NAVIGATION OVERLAY
+        ========================================= */
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        let isMenuOpen = false;
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenuBtn.innerText = 'Close';
+                mobileNav.classList.remove('pointer-events-none');
+                mobileNav.classList.add('opacity-100');
+                gsap.fromTo('#mobile-nav a', {
+                    y: 40,
+                    opacity: 0
+                }, {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.08,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                });
+            } else {
+                mobileMenuBtn.innerText = 'Menu';
+                mobileNav.classList.add('pointer-events-none');
+                mobileNav.classList.remove('opacity-100');
+            }
+        });
+    </script>
+</body>
+</html>
