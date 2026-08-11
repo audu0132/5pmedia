@@ -1,10 +1,14 @@
 {
-  "version": 2,
+  "version": 2, 
   "builds": [
     {
       "src": "**/*",
-      "use": "@vercel/static"
+      "use": "@vercel/static",
+      "config": {
+        "distDir": "."
+      }
     }
   ],
+  "outputDirectory": ".",
   "cleanUrls": true
 }
