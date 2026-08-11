@@ -1280,7 +1280,6 @@
     </div>
     <div class="mouse-glow" id="mouse-glow"></div>
     <div class="noise-layer"></div>
-    <canvas id="pcanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;"></canvas>
 
     <!-- ========================================
          CURSOR
@@ -1804,53 +1803,6 @@
         mobNav.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }));
-
-    /* =============================================
-       CANVAS PARTICLE SYSTEM
-    ============================================= */
-    const canvas = document.getElementById('pcanvas');
-    const ctx    = canvas.getContext('2d');
-    let W = canvas.width  = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    });
-
-    const pts = Array.from({ length: 110 }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 2 + 0.8,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        alpha: Math.random() * 0.5 + 0.25,
-        brand: Math.random() > 0.65
-    }));
-
-    function drawPts() {
-        ctx.clearRect(0, 0, W, H);
-        pts.forEach(p => {
-            const ddx = mx - p.x, ddy = my - p.y;
-            const dist = Math.hypot(ddx, ddy);
-            if (dist < 120) {
-                p.x -= (ddx / dist) * 0.35;
-                p.y -= (ddy / dist) * 0.35;
-            }
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-            if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.brand
-                ? `rgba(230,81,0,${p.alpha})`
-                : `rgba(28,25,23,${p.alpha * 0.5})`;
-            ctx.fill();
-        });
-        requestAnimationFrame(drawPts);
-    }
-    drawPts();
 
     /* =============================================
        PRELOADER → INIT HERO
